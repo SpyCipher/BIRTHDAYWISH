@@ -35,5 +35,5 @@ html, body {
   color: white;
   font-size: 18px;
   font-family: Arial, sans-serif;
-  pointer-events: none; /* Allows mouse interactions to pass through */
+  pointer-events: none; 
 }
