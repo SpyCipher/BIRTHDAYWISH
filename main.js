@@ -11,6 +11,8 @@ let mouseX = 0;
 let mouseY = 0;
 let screenMesh1, screenMesh2, images = [], currentImageIndex = 0;
 
+const baseUrl = import.meta.env.BASE_URL;
+
 class Particles {
   constructor(scene) {
     this.scene = scene;
@@ -44,7 +46,7 @@ class Particles {
     this.audioContext = new (window.AudioContext || window.AudioContext)();
     this.soundBuffer = null;
 
-    const soundUrl = '/explosionSound.mp3';
+    const soundUrl = `${baseUrl}sound/explosionSound.mp3`;
     fetch(soundUrl)
       .then(response => response.arrayBuffer())
       .then(arrayBuffer => this.audioContext.decodeAudioData(arrayBuffer))
@@ -194,7 +196,7 @@ function init() {
   particles = new Particles(scene);
 
   // Load background sound
-  backgroundSound = new Audio('/backgroundSound.mp3');
+  backgroundSound = new Audio(`${baseUrl}sound/backgroundSound.mp3`);
   backgroundSound.loop = true; 
   backgroundSound.volume = 0.6; 
 
@@ -228,7 +230,7 @@ function addDirectionalLights() {
 
 function addText() {
     const fontLoader = new FontLoader();
-  fontLoader.load('/fonts/Roboto.json', (font) => {
+  fontLoader.load(`${baseUrl}fonts/Roboto.json`, (font) => {
     const textMaterial = new THREE.MeshStandardMaterial({ color: 0xffa500, metalness: 0.7, roughness: 0.4 });
 
     // First Line: "WISH YOU"
@@ -287,7 +289,7 @@ function addText() {
 
 function createFloor() {
     const textureLoader = new THREE.TextureLoader();
-    const tileTexture = textureLoader.load('./tileTexture.jpg'); 
+    const tileTexture = textureLoader.load(`${baseUrl}/tileTexture.jpg`); 
 
     tileTexture.wrapS = tileTexture.wrapT = THREE.RepeatWrapping;
     tileTexture.repeat.set(6, 6); // Adjust the number of tiles
@@ -308,7 +310,7 @@ function createFloor() {
 
 function addTable() {
   const loader = new GLTFLoader();
-  loader.load('/Table.glb', (gltf) => {
+  loader.load(`${baseUrl}Table.glb`, (gltf) => {
     const model = gltf.scene;
     model.position.set(0, -10, 30); 
     model.scale.set(15, 12, 15); 
@@ -319,7 +321,7 @@ function addTable() {
 
 function addCake() {
   const loader = new GLTFLoader();
-  loader.load('/cakeBirthday.glb', (gltf) => {
+  loader.load(`${baseUrl}cakeBirthday.glb`, (gltf) => {
     const cake = gltf.scene;
     cake.position.set(0, -4, 30); 
     cake.scale.set(12, 12, 12); 
